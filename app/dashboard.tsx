@@ -52,12 +52,12 @@ export default function DashboardScreen() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <ScrollView style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Welcome, {user.name}! 👋</Text>
-          <Text style={styles.subtitle}>You're successfully signed in</Text>
-        </View>
-
+      <View style={styles.header}>
+        <Text style={styles.title}>Welcome, {user.name}! 👋</Text>
+        <Text style={styles.subtitle}>You're successfully signed in</Text>
+      </View>
+      
+      <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Profile Information</Text>
           
@@ -111,16 +111,13 @@ export default function DashboardScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#007AFF',
+    paddingTop: 20,
   },
   header: {
-    backgroundColor: '#007AFF',
     padding: 24,
     alignItems: 'center',
+    backgroundColor: '#007AFF',
   },
   title: {
     fontSize: 28,
@@ -133,6 +130,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'rgba(255, 255, 255, 0.8)',
     textAlign: 'center',
+  },
+  scrollContainer: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
   },
   card: {
     backgroundColor: '#fff',
