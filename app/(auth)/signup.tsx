@@ -178,7 +178,7 @@ export default function SignupScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    // backgroundColor: '#f5f5f5',
   },
   container: {
     flex: 1,

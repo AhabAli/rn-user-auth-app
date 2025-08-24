@@ -111,7 +111,6 @@ export default function DashboardScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#007AFF',
   },
   header: {
     padding: 24,
