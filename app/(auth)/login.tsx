@@ -5,10 +5,10 @@ import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import {
   ActivityIndicator,
+  Pressable,
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
   View
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -108,7 +108,7 @@ export default function LoginScreen() {
                     autoCapitalize="none"
                     autoCorrect={false}
                   />
-                  <TouchableOpacity
+                  <Pressable
                     style={styles.eyeButton}
                     onPress={togglePasswordVisibility}
                   >
@@ -117,7 +117,7 @@ export default function LoginScreen() {
                     ) : (
                       <Eye size={20} color="#666" />
                     )}
-                  </TouchableOpacity>
+                  </Pressable>
                 </View>
                 {errors.password && (
                   <Text style={styles.errorText}>{errors.password.message}</Text>
@@ -126,7 +126,7 @@ export default function LoginScreen() {
             )}
           />
 
-          <TouchableOpacity
+          <Pressable
             style={[styles.button, (isLoading || isSubmitting) && styles.buttonDisabled]}
             onPress={handleSubmit(onSubmit)}
             disabled={isLoading || isSubmitting}
@@ -136,16 +136,16 @@ export default function LoginScreen() {
             ) : (
               <Text style={styles.buttonText}>Sign In</Text>
             )}
-          </TouchableOpacity>
+          </Pressable>
 
-          <TouchableOpacity
+          <Pressable
             style={styles.linkButton}
             onPress={handleSignupPress}
           >
             <Text style={styles.linkText}>
               Don't have an account? <Text style={styles.linkHighlight}>Sign Up</Text>
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
     </SafeAreaView>

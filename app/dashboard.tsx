@@ -2,10 +2,10 @@ import { useRouter } from 'expo-router';
 import React from 'react';
 import {
   Alert,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -87,7 +87,7 @@ export default function DashboardScreen() {
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Account Actions</Text>
           
-          <TouchableOpacity
+          <Pressable
             style={styles.logoutButton}
             onPress={handleLogout}
             disabled={isLoading}
@@ -95,7 +95,7 @@ export default function DashboardScreen() {
             <Text style={styles.logoutButtonText}>
               {isLoading ? 'Logging out...' : 'Logout'}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         <View style={styles.footer}>

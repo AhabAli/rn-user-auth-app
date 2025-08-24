@@ -8,7 +8,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableOpacity,
+  Pressable,
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -131,7 +131,7 @@ export default function SignupScreen() {
                     autoCapitalize="none"
                     autoCorrect={false}
                   />
-                  <TouchableOpacity
+                  <Pressable
                     style={styles.eyeButton}
                     onPress={togglePasswordVisibility}
                   >
@@ -140,7 +140,7 @@ export default function SignupScreen() {
                     ) : (
                       <Eye size={20} color="#666" />
                     )}
-                  </TouchableOpacity>
+                  </Pressable>
                 </View>
                 {errors.password && (
                   <Text style={styles.errorText}>{errors.password.message}</Text>
@@ -149,7 +149,7 @@ export default function SignupScreen() {
             )}
           />
 
-          <TouchableOpacity
+          <Pressable
             style={[styles.button, (isLoading || isSubmitting) && styles.buttonDisabled]}
             onPress={handleSubmit(onSubmit)}
             disabled={isLoading || isSubmitting}
@@ -159,16 +159,16 @@ export default function SignupScreen() {
             ) : (
               <Text style={styles.buttonText}>Create Account</Text>
             )}
-          </TouchableOpacity>
+          </Pressable>
 
-          <TouchableOpacity
+          <Pressable
             style={styles.linkButton}
             onPress={handleLoginPress}
           >
             <Text style={styles.linkText}>
               Already have an account? <Text style={styles.linkHighlight}>Sign In</Text>
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
     </SafeAreaView>
