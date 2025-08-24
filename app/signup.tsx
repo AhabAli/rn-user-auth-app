@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'expo-router';
+import { Eye, EyeOff } from 'lucide-react-native';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import {
@@ -18,6 +19,7 @@ export default function SignupScreen() {
   const { signup, isLoading, error, clearAuthError } = useAuth();
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     control,
@@ -44,6 +46,10 @@ export default function SignupScreen() {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -110,16 +116,28 @@ export default function SignupScreen() {
             render={({ field: { onChange, onBlur, value } }) => (
               <View style={styles.inputContainer}>
                 <Text style={styles.label}>Password</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Enter your password"
-                  value={value}
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                  secureTextEntry
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                />
+                <View style={styles.passwordContainer}>
+                  <TextInput
+                    style={styles.passwordInput}
+                    placeholder="Enter your password"
+                    value={value}
+                    onChangeText={onChange}
+                    onBlur={onBlur}
+                    secureTextEntry={!showPassword}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                  />
+                  <TouchableOpacity
+                    style={styles.eyeButton}
+                    onPress={togglePasswordVisibility}
+                  >
+                    {showPassword ? (
+                      <EyeOff size={20} color="#666" />
+                    ) : (
+                      <Eye size={20} color="#666" />
+                    )}
+                  </TouchableOpacity>
+                </View>
                 {errors.password && (
                   <Text style={styles.errorText}>{errors.password.message}</Text>
                 )}
@@ -203,6 +221,25 @@ const styles = StyleSheet.create({
     padding: 16,
     fontSize: 16,
     backgroundColor: '#fff',
+  },
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    backgroundColor: '#fff',
+  },
+  passwordInput: {
+    flex: 1,
+    padding: 16,
+    fontSize: 16,
+    backgroundColor: 'transparent',
+  },
+  eyeButton: {
+    padding: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   button: {
     backgroundColor: '#007AFF',
