@@ -5,18 +5,18 @@ import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import {
   ActivityIndicator,
-  SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
-import { useAuth } from '../contexts/AuthContext';
-import { SignupInput, signupSchema } from '../types/auth';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useAuth } from '../../contexts/AuthContext';
+import { LoginInput, loginSchema } from '../../types/auth';
 
-export default function SignupScreen() {
-  const { signup, isLoading, error, clearAuthError } = useAuth();
+export default function LoginScreen() {
+  const { login, isLoading, error, clearAuthError } = useAuth();
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -25,24 +25,23 @@ export default function SignupScreen() {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignupInput>({
-    resolver: zodResolver(signupSchema),
+  } = useForm<LoginInput>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
-      name: '',
       email: '',
       password: '',
     },
   });
 
-  const onSubmit = async (data: SignupInput) => {
+  const onSubmit = async (data: LoginInput) => {
     try {
       setIsSubmitting(true);
       clearAuthError();
-      await signup(data.name, data.email, data.password);
+      await login(data.email, data.password);
       router.replace('/dashboard');
     } catch (err) {
       // Error is already handled by the auth context
-      console.error('Signup error:', err);
+      console.error('Login error:', err);
     } finally {
       setIsSubmitting(false);
     }
@@ -52,11 +51,15 @@ export default function SignupScreen() {
     setShowPassword(!showPassword);
   };
 
+  const handleSignupPress = () => {
+    router.push('/(auth)/signup');
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <Text style={styles.title}>Create Account</Text>
-        <Text style={styles.subtitle}>Sign up to get started</Text>
+        <Text style={styles.title}>Welcome Back</Text>
+        <Text style={styles.subtitle}>Sign in to your account</Text>
 
         {error && (
           <View style={styles.errorContainer}>
@@ -65,28 +68,6 @@ export default function SignupScreen() {
         )}
 
         <View style={styles.form}>
-          <Controller
-            control={control}
-            name="name"
-            render={({ field: { onChange, onBlur, value } }) => (
-              <View style={styles.inputContainer}>
-                <Text style={styles.label}>Full Name</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Enter your full name"
-                  value={value}
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                  autoCapitalize="words"
-                  autoCorrect={false}
-                />
-                {errors.name && (
-                  <Text style={styles.errorText}>{errors.name.message}</Text>
-                )}
-              </View>
-            )}
-          />
-
           <Controller
             control={control}
             name="email"
@@ -153,16 +134,16 @@ export default function SignupScreen() {
             {isLoading || isSubmitting ? (
               <ActivityIndicator color="#fff" />
             ) : (
-              <Text style={styles.buttonText}>Create Account</Text>
+              <Text style={styles.buttonText}>Sign In</Text>
             )}
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.linkButton}
-            onPress={() => router.push('/login')}
+            onPress={handleSignupPress}
           >
             <Text style={styles.linkText}>
-              Already have an account? <Text style={styles.linkHighlight}>Sign In</Text>
+              Don't have an account? <Text style={styles.linkHighlight}>Sign Up</Text>
             </Text>
           </TouchableOpacity>
         </View>

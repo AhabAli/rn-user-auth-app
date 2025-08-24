@@ -2,13 +2,13 @@ import { useRouter } from 'expo-router';
 import React from 'react';
 import {
   Alert,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function DashboardScreen() {
@@ -30,7 +30,7 @@ export default function DashboardScreen() {
           onPress: async () => {
             try {
               await logout();
-              router.replace('/login');
+              router.replace('/(auth)/login');
             } catch (error) {
               console.error('Logout error:', error);
             }
@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: '#007AFF',
-    paddingTop: 20,
   },
   header: {
     padding: 24,

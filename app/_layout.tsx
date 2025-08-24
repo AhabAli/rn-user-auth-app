@@ -8,8 +8,7 @@ function AppLayout() {
     <Stack>
       {/* Public routes - only accessible when NOT authenticated */}
       <Stack.Protected guard={!isAuthenticated}>
-        <Stack.Screen name="login" options={{ headerShown: false }} />
-        <Stack.Screen name="signup" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       </Stack.Protected>
 
       {/* Protected routes - only accessible when authenticated */}

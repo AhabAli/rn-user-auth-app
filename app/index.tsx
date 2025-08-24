@@ -1,6 +1,7 @@
 import { useRouter } from 'expo-router';
 import React, { useEffect } from 'react';
-import { ActivityIndicator, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function Index() {
@@ -12,7 +13,7 @@ export default function Index() {
       if (isAuthenticated && user) {
         router.replace('/dashboard');
       } else {
-        router.replace('/login');
+        router.replace('/(auth)/login');
       }
     }
   }, [isLoading, isAuthenticated, user, router]);
